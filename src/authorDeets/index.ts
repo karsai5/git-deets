@@ -3,14 +3,12 @@ import fs from "fs";
 import path from "path";
 import getFileAuthorStats from "./getFileAuthorStats";
 import getFileHistory from "./getFileHistory";
-import printMergeConflicts from "./mergeConflicts";
 
 import { program } from "commander";
 
 program
   .requiredOption("-f, --file <path>", "path to file")
-  .option("-d, --days <days>", "number of days of history to show", "14")
-  .option("-m, --merge", "show merge conflict details");
+  .option("-d, --days <days>", "number of days of history to show", "14");
 
 program.parse(process.argv);
 
@@ -29,15 +27,13 @@ const run = async () => {
     );
     return;
   }
+
   const repoPath = path.resolve(getPath(program.file));
   const filePath = path.resolve(program.file);
-  if (program.merge) {
-    printMergeConflicts(filePath);
-  } else {
-    await getFileAuthorStats(filePath);
-    console.log("");
-    await getFileHistory(repoPath, filePath, program.days);
-  }
+
+  await getFileAuthorStats(filePath);
+  console.log("");
+  await getFileHistory(repoPath, filePath, program.days);
 };
 
 run();

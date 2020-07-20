@@ -5,7 +5,8 @@
   "author": "Linus Karsai <lkarsai@atlassian.com>",
   "license": "MIT",
   "bin": {
-    "author-deets": "./lib/index.js"
+    "author-deets": "./lib/authorDeets/index.js",
+    "merge-helper": "./lib/mergeConflicts/index.js"
   },
   "dependencies": {
     "chalk": "^4.1.0",
